@@ -10,6 +10,12 @@ if (!isset($_SESSION['usuario_id'])) {
 
 $controller = new ProdutoController();
 $produtos = $controller->listar();
+
+$mensagem = "";
+if (isset($_SESSION['mensagem'])) {
+    $mensagem = $_SESSION['mensagem'];
+    unset($_SESSION['mensagem']);
+}
 ?>
 
 <!DOCTYPE html>
@@ -33,17 +39,27 @@ $produtos = $controller->listar();
         .product-image { width: 50px; height: 50px; object-fit: cover; border-radius: 4px; }
         .price { font-weight: bold; color: #28a745; }
         .no-image { width: 50px; height: 50px; background-color: #f0f0f0; display: flex; align-items: center; justify-content: center; border-radius: 4px; font-size: 10px; color: #666; }
+        .alert { padding: 10px; margin-bottom: 15px; border-radius: 4px; }
+        .alert-success { background-color: #d4edda; color: #155724; border: 1px solid #c3e6cb; }
+        .alert-error { background-color: #f8d7da; color: #721c24; border: 1px solid #f5c6cb; }
     </style>
 </head>
 <body>
     <div class="nav-links">
         <a href="painel.php">← Voltar ao Painel</a> |
         <a href="cadastrar_produto.php">+ Cadastrar Produto</a> |
+        <a href="gerenciar_categorias.php">Gerenciar Categorias</a> |
         <a href="listar_usuarios.php">Ver Usuários</a> |
         <a href="logout.php">Sair</a>
     </div>
 
     <h1>Lista de Produtos</h1>
+
+    <?php if ($mensagem != ""): ?>
+        <div class="alert <?php echo (strpos($mensagem, 'sucesso') !== false) ? 'alert-success' : 'alert-error'; ?>">
+            <?php echo $mensagem; ?>
+        </div>
+    <?php endif; ?>
 
     <table>
         <thead>
