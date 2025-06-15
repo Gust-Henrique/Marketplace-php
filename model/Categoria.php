@@ -1,5 +1,3 @@
-Categoria.php
-[02:26]
 <?php
 require_once '../config/database.php';
 
