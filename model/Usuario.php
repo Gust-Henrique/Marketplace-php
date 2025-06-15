@@ -25,10 +25,10 @@ class Usuario {
 
         $stmt = $this->conn->prepare($query);
 
-        
+        $senhaHash = password_hash($this->senha, PASSWORD_DEFAULT);
         $stmt->bindParam(':nome', $this->nome);
         $stmt->bindParam(':email', $this->email);
-        $stmt->bindParam(':senha', password_hash($this->senha, PASSWORD_DEFAULT));
+        $stmt->bindParam(':senha', $senhaHash);
         $stmt->bindParam(':cpf', $this->cpf);
         $stmt->bindParam(':data_nascimento', $this->data_nascimento);
 
