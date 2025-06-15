@@ -1,4 +1,5 @@
 <?php
+session_start();
 require_once 'config/config.php';
 require_once 'controller/ProdutoController.php';
 require_once 'model/Categoria.php';
@@ -19,6 +20,10 @@ if ($categoria_filtro) {
 } else {
     $produtos = $produtoController->listar();
 }
+
+// Verificar se o usuário está logado
+$usuario_logado = isset($_SESSION['usuario_id']);
+$nome_usuario = $usuario_logado ? $_SESSION['usuario_nome'] : '';
 ?>
 
 <!DOCTYPE html>
@@ -47,6 +52,7 @@ if ($categoria_filtro) {
             padding: 2rem 0;
             text-align: center;
             box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: relative;
         }
 
         .header h1 {
@@ -66,25 +72,76 @@ if ($categoria_filtro) {
             padding: 0 20px;
         }
 
-        .auth-links {
+        .auth-section {
             position: absolute;
             top: 20px;
             right: 20px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
         }
 
-        .auth-links a {
+        .user-info {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            background: rgba(255,255,255,0.1);
+            padding: 8px 16px;
+            border-radius: 20px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        .user-avatar {
+            width: 32px;
+            height: 32px;
+            background: rgba(255,255,255,0.3);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 14px;
+            font-weight: bold;
+        }
+
+        .user-name {
+            font-size: 14px;
+            font-weight: 500;
+        }
+
+        .auth-links a, .btn-painel, .btn-logout {
             color: white;
             text-decoration: none;
-            margin-left: 15px;
             padding: 8px 16px;
             border-radius: 20px;
             background: rgba(255,255,255,0.2);
             transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+            font-size: 14px;
+            display: inline-block;
         }
 
-        .auth-links a:hover {
+        .auth-links a:hover, .btn-painel:hover, .btn-logout:hover {
             background: rgba(255,255,255,0.3);
             transform: translateY(-2px);
+        }
+
+        .btn-painel {
+            background: rgba(40, 167, 69, 0.8);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-painel:hover {
+            background: rgba(40, 167, 69, 1);
+        }
+
+        .btn-logout {
+            background: rgba(220, 53, 69, 0.8);
+            border: 1px solid rgba(255,255,255,0.3);
+        }
+
+        .btn-logout:hover {
+            background: rgba(220, 53, 69, 1);
         }
 
         .filters {
@@ -253,6 +310,18 @@ if ($categoria_filtro) {
                 font-size: 2rem;
             }
             
+            .auth-section {
+                position: static;
+                justify-content: center;
+                margin-top: 1rem;
+                flex-wrap: wrap;
+            }
+
+            .user-info {
+                order: -1;
+                margin-bottom: 10px;
+            }
+            
             .filter-row {
                 flex-direction: column;
             }
@@ -264,19 +333,44 @@ if ($categoria_filtro) {
             .products-grid {
                 grid-template-columns: 1fr;
             }
-            
-            .auth-links {
-                position: static;
-                margin-top: 1rem;
+        }
+
+        @media (max-width: 480px) {
+            .auth-section {
+                flex-direction: column;
+                gap: 10px;
+            }
+
+            .user-info {
+                margin-bottom: 0;
             }
         }
     </style>
 </head>
 <body>
     <div class="header">
-        <div class="auth-links">
-            <a href="views/login.php">Entrar</a>
-            <a href="views/cadastrar_usuario.php">Cadastrar</a>
+        <div class="auth-section">
+            <?php if ($usuario_logado): ?>
+                <?php
+                    // Limita o nome a no máximo 4 caracteres + "..."
+                    $display_nome = (mb_strlen($nome_usuario, 'UTF-8') > 4)
+                        ? mb_substr($nome_usuario, 0, 4, 'UTF-8') . '...'
+                        : $nome_usuario;
+                ?>
+                <div class="user-info">
+                    <div class="user-avatar">
+                        <?php echo strtoupper(mb_substr($nome_usuario, 0, 1, 'UTF-8')); ?>
+                    </div>
+                    <span class="user-name">Olá, <?php echo htmlspecialchars($display_nome, ENT_QUOTES, 'UTF-8'); ?></span>
+                </div>
+                <a href="views/painel.php" class="btn-painel">📋 Meu Painel</a>
+                <a href="views/logout.php" class="btn-logout">🚪 Sair</a>
+            <?php else: ?>
+                <div class="auth-links">
+                    <a href="views/login.php">Entrar</a>
+                    <a href="views/cadastrar_usuario.php">Cadastrar</a>
+                </div>
+            <?php endif; ?>
         </div>
         <div class="container">
             <h1>🛍️ Marketplace</h1>

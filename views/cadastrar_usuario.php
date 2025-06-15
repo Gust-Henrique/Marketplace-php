@@ -49,7 +49,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             box-shadow: 0 15px 35px rgba(0,0,0,0.1);
             width: 100%;
             max-width: 450px;
-            position: relative;
         }
 
         .header {
@@ -67,6 +66,28 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             color: #666;
             font-size: 1rem;
         }
+
+        .voltar-wrapper {
+            margin-top: 20px;
+            text-align: center;
+        }
+        /* ⬇⬇ Botão “Voltar ao Início” ajustado ⬇⬇ */
+        .back-link {
+            display: inline-block;
+            color: #667eea;
+            text-decoration: none;
+            font-weight: 500;
+            padding: 10px 18px;
+            background: rgba(102,126,234,0.15);
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+
+        .back-link:hover {
+            background: rgba(102,126,234,0.25);
+            transform: translateY(-2px);
+        }
+        /* ⬆⬆ Botão “Voltar ao Início” ajustado ⬆⬆ */
 
         .form-group {
             margin-bottom: 1.5rem;
@@ -125,6 +146,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             margin-bottom: 1.5rem;
             border-radius: 8px;
             font-weight: 500;
+            display: flex;
+            align-items: center;
+            gap: 10px;
         }
 
         .alert-success {
@@ -158,57 +182,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             text-decoration: underline;
         }
 
-        .back-link {
-            position: absolute;
-            top: -60px;
-            left: 0;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            padding: 8px 16px;
-            background: rgba(255,255,255,0.2);
-            border-radius: 20px;
-            transition: all 0.3s ease;
-        }
-
-        .back-link:hover {
-            background: rgba(255,255,255,0.3);
-            transform: translateY(-2px);
-        }
-
         @media (max-width: 480px) {
             .container {
                 padding: 2rem;
                 margin: 10px;
             }
-            
             .header h1 {
                 font-size: 1.7rem;
             }
-            
             .back-link {
-                position: static;
-                display: inline-block;
-                margin-bottom: 20px;
+                margin-bottom: 15px;
             }
         }
     </style>
 </head>
 <body>
-     <div class="container">
-        <a href="../index.php" class="back-link">← Voltar ao Início</a>
-        
+    <div class="container">
         <div class="header">
             <h1>🎯 Criar Conta</h1>
             <p>Junte-se ao nosso marketplace</p>
         </div>
 
+        <?php if ($mensagem != ""): ?>
+            <div class="alert <?php echo (strpos($mensagem, 'sucesso') !== false) ? 'alert-success' : 'alert-error'; ?>">
+                <?php echo $mensagem; ?>
+            </div>
+        <?php endif; ?>
 
-    <?php if ($mensagem != ""): ?>
-        <p><strong><?php echo $mensagem; ?></strong></p>
-    <?php endif; ?>
-
-    <form action="" method="POST">
+        <!-- Formulário -->
+        <form action="" method="POST">
             <div class="form-group">
                 <label for="nome">Nome Completo</label>
                 <input type="text" id="nome" name="nome" required placeholder="Digite seu nome completo">
@@ -237,9 +239,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn">Criar Conta</button>
         </form>
 
+        <!-- ✅ Botão de Voltar ao Início logo após o form -->
+        <div class="voltar-wrapper">
+            <a href="painel.php" class="back-link">← Voltar ao Painel</a>
+        </div>
+
         <div class="links">
             <p>Já tem uma conta? <a href="login.php">Faça login aqui</a></p>
         </div>
     </div>
 </body>
+
 </html>

@@ -16,7 +16,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     if ($usuario) {
         $_SESSION['usuario_id'] = $usuario['id'];
         $_SESSION['usuario_nome'] = $usuario['nome'];
-        header('Location: painel.php');
+        header('Location: ../index.php');
         exit;
     } else {
         $mensagem = "Email ou senha inválidos.";
