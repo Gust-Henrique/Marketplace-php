@@ -1,5 +1,5 @@
 <?php
-require_once 'model/Usuario.php';
+require_once '../model/Usuario.php';
 
 class UsuarioController {
 
@@ -28,7 +28,7 @@ class UsuarioController {
         return $usuario->buscarPorId($id);
     }
 
-    public function atualizar($dados) {
+    public function editar($dados) {
         $usuario = new Usuario();
         $usuario->id = $dados['id'];
         $usuario->nome = $dados['nome'];
