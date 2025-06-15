@@ -38,8 +38,9 @@ class Produto {
         return false;
     }
     
-public function listar() {
-        $query = "SELECT p., c.nome AS categoria_nome, u.nome AS usuario_nome 
+    public function listar() {
+
+        $query = "SELECT p.*, c.nome AS categoria_nome, u.nome AS usuario_nome 
                   FROM " . $this->table . " p
                   LEFT JOIN categorias c ON p.categoria_id = c.id
                   LEFT JOIN usuarios u ON p.usuario_id = u.id
@@ -51,7 +52,12 @@ public function listar() {
     }
 
     public function buscarPorId($id) {
-        $query = "SELECT FROM " . $this->table . " WHERE id = :id LIMIT 1";
+
+        $query = "SELECT p.*, c.nome AS categoria_nome, u.nome AS usuario_nome 
+                  FROM " . $this->table . " p
+                  LEFT JOIN categorias c ON p.categoria_id = c.id
+                  LEFT JOIN usuarios u ON p.usuario_id = u.id
+                  WHERE p.id = :id LIMIT 1";
         $stmt = $this->conn->prepare($query);
         $stmt->bindParam(':id', $id);
         $stmt->execute();
@@ -88,6 +94,33 @@ public function listar() {
             return true;
         }
         return false;
+    }
+
+    public function buscarPorCategoria($categoria_id) {
+        $query = "SELECT p.*, c.nome AS categoria_nome, u.nome AS usuario_nome 
+                  FROM " . $this->table . " p
+                  LEFT JOIN categorias c ON p.categoria_id = c.id
+                  LEFT JOIN usuarios u ON p.usuario_id = u.id
+                  WHERE p.categoria_id = :categoria_id
+                  ORDER BY p.id DESC";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':categoria_id', $categoria_id);
+        $stmt->execute();
+        return $stmt;
+    }
+
+    public function buscarPorUsuario($usuario_id) {
+        $query = "SELECT p.*, c.nome AS categoria_nome 
+                  FROM " . $this->table . " p
+                  LEFT JOIN categorias c ON p.categoria_id = c.id
+                  WHERE p.usuario_id = :usuario_id
+                  ORDER BY p.id DESC";
+        
+        $stmt = $this->conn->prepare($query);
+        $stmt->bindParam(':usuario_id', $usuario_id);
+        $stmt->execute();
+        return $stmt;
     }
 }
 ?>
