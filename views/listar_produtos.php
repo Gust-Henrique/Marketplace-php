@@ -9,7 +9,7 @@ if (!isset($_SESSION['usuario_id'])) {
 }
 
 $controller = new ProdutoController();
-$produtos = $controller->listar();
+$produtos   = $controller->listar();
 
 $mensagem = "";
 if (isset($_SESSION['mensagem'])) {
@@ -34,7 +34,7 @@ if (isset($_SESSION['mensagem'])) {
             background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
         }
 
-        /* Navbar moderna e limpa */
+        /* Navbar */
         .nav-links {
             display: flex;
             gap: 20px;
@@ -44,7 +44,6 @@ if (isset($_SESSION['mensagem'])) {
             font-weight: 600;
             font-size: 15px;
         }
-
         .nav-links a {
             color: #f0f2f5;
             text-decoration: none;
@@ -52,9 +51,8 @@ if (isset($_SESSION['mensagem'])) {
             border-radius: 5px;
             transition: background-color 0.2s ease, color 0.2s ease;
         }
-
         .nav-links a:hover {
-            background-color:rgb(0, 4, 255);
+            background-color: rgb(0, 4, 255);
             color: #fff;
         }
 
@@ -85,7 +83,7 @@ if (isset($_SESSION['mensagem'])) {
             border: 1px solid #f5c2c7;
         }
 
-        /* Tabela com cantos arredondados e sombra sutil */
+        /* Tabela */
         table {
             width: 100%;
             border-collapse: separate;
@@ -96,30 +94,26 @@ if (isset($_SESSION['mensagem'])) {
             overflow: hidden;
             font-size: 14px;
         }
-
         thead tr {
             background-color: #f0f2f5;
             color: #555;
             font-weight: 700;
         }
-
         th, td {
             padding: 14px 16px;
             text-align: left;
             vertical-align: middle;
         }
-
         tbody tr {
             background: #fff;
             box-shadow: 0 1px 2px rgb(0 0 0 / 0.05);
             border-radius: 6px;
         }
-
         tbody tr:hover {
             background-color: #f9fafb;
         }
 
-        /* Imagem do produto */
+        /* Imagem */
         .product-image {
             width: 50px;
             height: 50px;
@@ -142,13 +136,13 @@ if (isset($_SESSION['mensagem'])) {
             box-shadow: inset 0 1px 3px rgb(0 0 0 / 0.05);
         }
 
-        /* Preço destacado */
+        /* Preço */
         .price {
             font-weight: 700;
             color: #198754;
         }
 
-        /* Botões estilo flat e com cores sutis */
+        /* Botões */
         .btn {
             padding: 6px 14px;
             font-size: 13px;
@@ -160,45 +154,18 @@ if (isset($_SESSION['mensagem'])) {
             cursor: pointer;
             border: none;
         }
+        .btn-edit   { background-color: #0d6efd;  color: #fff; }
+        .btn-delete { background-color: #dc3545;  color: #fff; }
+        .btn-buy    { background-color: #28a745;  color: #fff; }
+        .btn-edit:hover   { background-color: #084cd6; }
+        .btn-delete:hover { background-color: #a71d2a; }
+        .btn-buy:hover    { background-color: #218838; }
 
-        .btn-edit {
-            background-color: #0d6efd;
-            color: white;
-        }
-        .btn-edit:hover {
-            background-color: #084cd6;
-        }
-
-        .btn-delete {
-            background-color: #dc3545;
-            color: white;
-        }
-        .btn-delete:hover {
-            background-color: #a71d2a;
-        }
-
-        /* Link no empty state */
-        td[colspan] a {
-            color: #0d6efd;
-            text-decoration: underline;
-            font-weight: 600;
-        }
-
-        /* Responsividade simples */
+        /* Responsivo */
         @media (max-width: 720px) {
-            .nav-links {
-                flex-wrap: wrap;
-                gap: 12px;
-            }
-
-            table, thead, tbody, th, td, tr {
-                display: block;
-            }
-
-            thead tr {
-                display: none;
-            }
-
+            .nav-links { flex-wrap: wrap; gap: 12px; }
+            table, thead, tbody, th, td, tr { display: block; }
+            thead tr { display: none; }
             tbody tr {
                 margin-bottom: 20px;
                 box-shadow: none;
@@ -207,7 +174,6 @@ if (isset($_SESSION['mensagem'])) {
                 border-radius: 8px;
                 padding: 12px;
             }
-
             tbody td {
                 padding: 8px 12px;
                 text-align: right;
@@ -215,11 +181,7 @@ if (isset($_SESSION['mensagem'])) {
                 border: none;
                 border-bottom: 1px solid #eee;
             }
-
-            tbody td:last-child {
-                border-bottom: 0;
-            }
-
+            tbody td:last-child { border-bottom: 0; }
             tbody td::before {
                 content: attr(data-label);
                 position: absolute;
@@ -230,7 +192,6 @@ if (isset($_SESSION['mensagem'])) {
                 text-transform: uppercase;
                 font-size: 11px;
             }
-
             .product-image, .no-image {
                 width: 40px;
                 height: 40px;
@@ -239,66 +200,73 @@ if (isset($_SESSION['mensagem'])) {
     </style>
 </head>
 <body>
-    <nav class="nav-links">
-        <a href="painel.php">← Voltar ao Painel</a>
-        <a href="cadastrar_produto.php">+ Cadastrar Produto</a>
-        <a href="gerenciar_categorias.php">Gerenciar Categorias</a>
-        <a href="listar_usuarios.php">Ver Usuários</a>
-        <a href="logout.php">Sair</a>
-    </nav>
+<nav class="nav-links">
+    <a href="painel.php">← Voltar ao Painel</a>
+    <a href="cadastrar_produto.php">+ Cadastrar Produto</a>
+    <a href="gerenciar_categorias.php">Gerenciar Categorias</a>
+    <a href="listar_usuarios.php">Ver Usuários</a>
+    <a href="logout.php">Sair</a>
+</nav>
 
-    <h1>Lista de Produtos</h1>
+<h1>Lista de Produtos</h1>
 
-    <?php if ($mensagem != ""): ?>
-        <div class="alert <?php echo (strpos($mensagem, 'sucesso') !== false) ? 'alert-success' : 'alert-error'; ?>">
-            <?php echo $mensagem; ?>
-        </div>
-    <?php endif; ?>
+<?php if ($mensagem !== ""): ?>
+    <div class="alert <?php echo (strpos($mensagem, 'sucesso') !== false) ? 'alert-success' : 'alert-error'; ?>">
+        <?php echo $mensagem; ?>
+    </div>
+<?php endif; ?>
 
-    <table>
-        <thead>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Imagem</th>
+            <th>Nome</th>
+            <th>Descrição</th>
+            <th>Preço</th>
+            <th>Categoria</th>
+            <th>Vendedor</th>
+            <th>Ações</th>
+        </tr>
+    </thead>
+    <tbody>
+    <?php if (!empty($produtos)) : ?>
+        <?php foreach ($produtos as $produto) : ?>
             <tr>
-                <th>ID</th>
-                <th>Imagem</th>
-                <th>Nome</th>
-                <th>Descrição</th>
-                <th>Preço</th>
-                <th>Categoria</th>
-                <th>Vendedor</th>
-                <th>Ações</th>
+                <td data-label="ID"><?php echo $produto['id']; ?></td>
+                <td data-label="Imagem">
+                    <?php if (!empty($produto['imagem'])): ?>
+                        <img src="../public/images/<?php echo $produto['imagem']; ?>"
+                             alt="<?php echo htmlspecialchars($produto['nome']); ?>" class="product-image" />
+                    <?php else: ?>
+                        <div class="no-image">Sem imagem</div>
+                    <?php endif; ?>
+                </td>
+                <td data-label="Nome"><?php echo htmlspecialchars($produto['nome']); ?></td>
+                <td data-label="Descrição">
+                    <?php echo htmlspecialchars(mb_strimwidth($produto['descricao'], 0, 100, '...')); ?>
+                </td>
+                <td data-label="Preço" class="price">
+                    R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?>
+                </td>
+                <td data-label="Categoria"><?php echo htmlspecialchars($produto['categoria_nome'] ?? 'Sem categoria'); ?></td>
+                <td data-label="Vendedor"><?php echo htmlspecialchars($produto['usuario_nome'] ?? 'Usuário removido'); ?></td>
+                <td data-label="Ações">
+                    <a href="editar_produto.php?id=<?php echo $produto['id']; ?>"   class="btn btn-edit">Editar</a>
+                    <a href="excluir_produto.php?id=<?php echo $produto['id']; ?>" class="btn btn-delete"
+                       onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</a>
+                    <a href="compra.php?id=<?php echo $produto['id']; ?>"         class="btn btn-buy">Comprar</a>
+                </td>
             </tr>
-        </thead>
-        <tbody>
-            <?php if (!empty($produtos)) : ?>
-                <?php foreach ($produtos as $produto) : ?>
-                    <tr>
-                        <td data-label="ID"><?php echo $produto['id']; ?></td>
-                        <td data-label="Imagem">
-                            <?php if (!empty($produto['imagem'])): ?>
-                                <img src="../public/images/<?php echo $produto['imagem']; ?>" alt="<?php echo htmlspecialchars($produto['nome']); ?>" class="product-image" />
-                            <?php else: ?>
-                                <div class="no-image">Sem imagem</div>
-                            <?php endif; ?>
-                        </td>
-                        <td data-label="Nome"><?php echo htmlspecialchars($produto['nome']); ?></td>
-                        <td data-label="Descrição"><?php echo htmlspecialchars(mb_strimwidth($produto['descricao'], 0, 100, '...')); ?></td>
-                        <td data-label="Preço" class="price">R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></td>
-                        <td data-label="Categoria"><?php echo htmlspecialchars($produto['categoria_nome'] ?? 'Sem categoria'); ?></td>
-                        <td data-label="Vendedor"><?php echo htmlspecialchars($produto['usuario_nome'] ?? 'Usuário removido'); ?></td>
-                        <td data-label="Ações">
-                            <a href="editar_produto.php?id=<?php echo $produto['id']; ?>" class="btn btn-edit">Editar</a>
-                            <a href="excluir_produto.php?id=<?php echo $produto['id']; ?>" class="btn btn-delete" onclick="return confirm('Tem certeza que deseja excluir este produto?')">Excluir</a>
-                        </td>
-                    </tr>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <tr>
-                    <td colspan="8" style="text-align:center; padding: 30px 0; color: #666;">
-                        Nenhum produto encontrado. <a href="cadastrar_produto.php">Cadastrar primeiro produto</a>
-                    </td>
-                </tr>
-            <?php endif; ?>
-        </tbody>
-    </table>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <tr>
+            <td colspan="8" style="text-align:center; padding: 30px 0; color: #666;">
+                Nenhum produto encontrado. <a href="cadastrar_produto.php">Cadastrar primeiro produto</a>
+            </td>
+        </tr>
+    <?php endif; ?>
+    </tbody>
+</table>
 </body>
 </html>
