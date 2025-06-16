@@ -35,8 +35,8 @@ if ($sucesso) {
         <h1>Compra realizada com sucesso! 🎉</h1>
         <p><strong>Produto:</strong> <?php echo htmlspecialchars($produto['nome']); ?></p>
         <p><strong>Valor:</strong> R$ <?php echo number_format($produto['preco'], 2, ',', '.'); ?></p>
-        <p>O vendedor receberá a notificação do seu pedido.</p>
-        <a href="../listar_produtos.php">← Voltar à loja</a>
+        <p>O vendedor receberá a notificação do seu pedido.</p>   
+        <a href="../index.php">← Voltar à loja</a>
     </div>
     </body></html>
     <?php
