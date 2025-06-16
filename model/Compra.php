@@ -1,5 +1,5 @@
 <?php
-require_once(DIR . '/../config/database.php');
+require_once(__DIR__.'/../config/database.php');
 
 class Compra {
     private $conn;
