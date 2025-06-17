@@ -540,7 +540,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     </div>
 
     <script>
-        // Preview da imagem selecionada
+        
         document.getElementById('imagem').addEventListener('change', function(e) {
             const file = e.target.files[0];
             const display = document.querySelector('.file-input-display');
@@ -557,12 +557,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         });
 
-        // Loading ao submeter formulário
+        
         document.getElementById('productForm').addEventListener('submit', function() {
             document.getElementById('loading').style.display = 'flex';
         });
 
-        // Formatação do preço
+        
         document.getElementById('preco').addEventListener('input', function(e) {
             let value = e.target.value;
             if (value < 0) {
@@ -570,7 +570,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         });
 
-        // Drag and drop para upload de imagem
+        
         const fileInputDisplay = document.querySelector('.file-input-display');
         const fileInput = document.getElementById('imagem');
 
@@ -608,7 +608,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             const files = dt.files;
             fileInput.files = files;
             
-            // Trigger change event
+            
             const event = new Event('change', { bubbles: true });
             fileInput.dispatchEvent(event);
         }

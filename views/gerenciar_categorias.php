@@ -56,7 +56,7 @@ if (isset($_GET['editar'])) {
 <title>Gerenciar Categorias</title>
 
 <style>
-    /* Reset básico */
+    
     * {
         box-sizing: border-box;
     }
@@ -108,7 +108,7 @@ if (isset($_GET['editar'])) {
         letter-spacing: 1px;
     }
 
-    /* Alertas */
+    
     .alert {
         padding: 12px 20px;
         border-radius: 6px;
@@ -127,7 +127,7 @@ if (isset($_GET['editar'])) {
         color: #721c24;
     }
 
-    /* Card geral */
+   
     .card {
         background: #fafafa;
         border-radius: 8px;
@@ -149,7 +149,7 @@ if (isset($_GET['editar'])) {
         color: #555;
     }
 
-    /* Formulário */
+    
     form.form-inline {
         display: flex;
         flex-wrap: wrap;
@@ -180,7 +180,7 @@ if (isset($_GET['editar'])) {
         box-shadow: 0 0 8px rgba(106, 17, 203, 0.3);
     }
 
-    /* Botões */
+    
     .btn {
         padding: 12px 25px;
         border: none;
@@ -222,7 +222,7 @@ if (isset($_GET['editar'])) {
         border-radius: 4px;
     }
 
-    /* Tabela */
+    
     table {
         width: 100%;
         border-collapse: separate;
@@ -266,7 +266,7 @@ if (isset($_GET['editar'])) {
         font-weight: 600;
     }
 
-    /* Actions */
+   
     .actions {
         white-space: nowrap;
         display: flex;
@@ -277,7 +277,7 @@ if (isset($_GET['editar'])) {
         margin: 0;
     }
 
-    /* Info extra */
+    
     .card ul {
         padding-left: 20px;
         color: #555;
@@ -287,7 +287,7 @@ if (isset($_GET['editar'])) {
         font-size: 14px;
     }
 
-    /* Responsividade */
+    
     @media (max-width: 600px) {
         form.form-inline {
             flex-direction: column;
@@ -345,7 +345,7 @@ if (isset($_GET['editar'])) {
         </form>
     </div>
 
-    <!-- Lista de Categorias -->
+   
     <div class="card">
         <h3>Categorias Cadastradas</h3>
         

@@ -46,10 +46,9 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
     <title>Editar Usuário</title>
 
     <style>
-        /* ====== RESET BÁSICO ====== */
+        
         * { margin: 0; padding: 0; box-sizing: border-box; }
 
-        /* ====== LAYOUT GERAL ====== */
         body {
             font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
             line-height: 1.6;
@@ -71,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             max-width: 450px;
         }
 
-        /* ====== TÍTULO / HEADER ====== */
+        
         .header {
             text-align: center;
             margin-bottom: 2rem;
@@ -85,7 +84,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             font-size: 1rem;
         }
 
-        /* ====== LINK DE VOLTAR ====== */
+       
         .back-link {
             display: inline-block;
             margin-bottom: 20px;
@@ -102,7 +101,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             transform: translateY(-2px);
         }
 
-        /* ====== ALERTAS ====== */
+        
         .alert {
             padding: 1rem;
             margin-bottom: 1.5rem;
@@ -115,7 +114,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .alert-success { background:#d4edda; color:#155724; border:1px solid #c3e6cb; }
         .alert-error   { background:#f8d7da; color:#721c24; border:1px solid #f5c6cb; }
 
-        /* ====== FORMULÁRIO ====== */
+        
         .form-group { margin-bottom: 1.5rem; }
         .form-group label {
             display: block;
@@ -140,7 +139,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             box-shadow:0 0 0 3px rgba(102,126,234,.1);
         }
 
-        /* ====== BOTÕES ====== */
+        
         .btn {
             width:100%;
             background:linear-gradient(135deg,#667eea 0%,#764ba2 100%);
@@ -156,7 +155,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
         .btn:hover    { transform:translateY(-2px); box-shadow:0 8px 25px rgba(102,126,234,.3); }
         .btn:active   { transform:translateY(0); }
 
-        /* ====== RESPONSIVO ====== */
+       
         @media(max-width:480px){
             .container { padding:2rem; margin:10px; }
             .header h1 { font-size:1.7rem; }
@@ -171,17 +170,17 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <p>Atualize as informações abaixo</p>
         </div>
 
-        <!-- Link de voltar -->
+        
         <a href="painel.php" class="back-link">← Voltar ao Painel</a>
 
-        <!-- Mensagem flash (sucesso ou erro) -->
+        
         <?php if ($mensagem != ""): ?>
             <div class="alert <?php echo (strpos($mensagem,'sucesso')!==false) ? 'alert-success' : 'alert-error'; ?>">
                 <?php echo $mensagem; ?>
             </div>
         <?php endif; ?>
 
-        <!-- Formulário -->
+        
         <form action="" method="POST">
             <input type="hidden" name="id" value="<?php echo $usuario['id']; ?>">
 

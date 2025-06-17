@@ -87,7 +87,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             background: rgba(102,126,234,0.25);
             transform: translateY(-2px);
         }
-        /* ⬆⬆ Botão “Voltar ao Início” ajustado ⬆⬆ */
+        
 
         .form-group {
             margin-bottom: 1.5rem;
@@ -239,7 +239,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             <button type="submit" class="btn">Criar Conta</button>
         </form>
 
-        <!-- ✅ Botão de Voltar ao Início logo após o form -->
+        
         <div class="voltar-wrapper">
             <a href="painel.php" class="back-link">← Voltar ao Painel</a>
         </div>

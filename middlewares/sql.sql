@@ -1,4 +1,4 @@
-/*CREATE DATABASE marketplace;
+CREATE DATABASE marketplace;
 USE marketplace;
 
 CREATE TABLE usuarios (
@@ -23,7 +23,7 @@ CREATE TABLE produtos (
     preco DECIMAL(10, 2) NOT NULL,
     imagem VARCHAR(255),
     categoria_id INT,
-    usuario_id INT, -- Usuário que cadastrou o produto
+    usuario_id INT, 
     criado_em TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
 
     FOREIGN KEY (categoria_id) REFERENCES categorias(id) ON DELETE SET NULL,
@@ -62,3 +62,16 @@ INSERT INTO categorias (nome) VALUES
 ('Informática'),
 ('Celulares e Tablets'),
 ('Eletrodomésticos');
+
+CREATE TABLE compras (
+  id            INT AUTO_INCREMENT PRIMARY KEY,
+  produto_id    INT NOT NULL,
+  comprador_id  INT NOT NULL,
+  data_compra   DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  status        VARCHAR(20) DEFAULT 'pendente',
+
+  CONSTRAINT fk_compra_produto
+    FOREIGN KEY (produto_id)   REFERENCES produtos(id)  ON DELETE CASCADE,
+  CONSTRAINT fk_compra_usuario
+    FOREIGN KEY (comprador_id) REFERENCES usuarios(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;

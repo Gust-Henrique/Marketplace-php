@@ -13,7 +13,7 @@ $controller = new ProdutoController();
 $mensagem = "";
 $categorias = [];
 
-// Buscar categorias para o select
+
 try {
     $database = new Database();
     $conn = $database->getConnection();
@@ -24,7 +24,7 @@ try {
     $mensagem = "Erro ao carregar categorias: " . $e->getMessage();
 }
 
-// Buscar produto a ser editado
+
 if (isset($_GET['id'])) {
     $id = $_GET['id'];
     $produto = $controller->buscarPorId($id);
@@ -39,21 +39,21 @@ if (isset($_GET['id'])) {
 }
 
 if ($_SERVER['REQUEST_METHOD'] == 'POST') {
-    // Processar upload de imagem (se houver)
-    $imagem = $produto['imagem']; // Manter imagem atual por padrão
+    
+    $imagem = $produto['imagem']; 
     
     if (isset($_FILES['imagem']) && $_FILES['imagem']['error'] == 0) {
         $target_dir = "../public/images/";
         $target_file = $target_dir . basename($_FILES["imagem"]["name"]);
         $imageFileType = strtolower(pathinfo($target_file, PATHINFO_EXTENSION));
         
-        // Verificar se é uma imagem real
+       
         $check = getimagesize($_FILES["imagem"]["tmp_name"]);
         if ($check !== false) {
-            // Permitir apenas alguns formatos
+        
             if ($imageFileType == "jpg" || $imageFileType == "png" || $imageFileType == "jpeg" || $imageFileType == "gif") {
                 if (move_uploaded_file($_FILES["imagem"]["tmp_name"], $target_file)) {
-                    // Remover imagem antiga se existir
+                    
                     if (!empty($produto['imagem']) && file_exists($target_dir . $produto['imagem'])) {
                         unlink($target_dir . $produto['imagem']);
                     }
@@ -81,7 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
 
         $mensagem = $controller->atualizar($dados);
         
-        // Atualizar dados do produto
+       
         $produto = $controller->buscarPorId($id);
     }
 }
@@ -621,12 +621,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         });
 
-        // Loading ao submeter formulário
+        
         document.getElementById('productForm').addEventListener('submit', function() {
             document.getElementById('loading').style.display = 'flex';
         });
 
-        // Formatação do preço
+        
         document.getElementById('preco').addEventListener('input', function(e) {
             let value = e.target.value;
             if (value < 0) {
@@ -634,7 +634,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             }
         });
 
-        // Drag and drop para upload de imagem
+        
         const fileInputDisplay = document.querySelector('.file-input-display');
         const fileInput = document.getElementById('imagem');
 
@@ -672,7 +672,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST') {
             const files = dt.files;
             fileInput.files = files;
             
-            // Trigger change event
+            
             const event = new Event('change', { bubbles: true });
             fileInput.dispatchEvent(event);
         }
